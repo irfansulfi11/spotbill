@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://spotbill.in/</loc>
+<lastmod>2026-08-22T13:05:00.222Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>1</priority>
+</url>
+<url>
+<loc>https://spotbill.in/support/</loc>
+<lastmod>2026-08-22T13:05:00.222Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://spotbill.in/privacy/</loc>
+<lastmod>2026-08-22T13:05:00.222Z</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://spotbill.in/terms/</loc>
+<lastmod>2026-08-22T13:05:00.222Z</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.3</priority>
+</url>
+</urlset>

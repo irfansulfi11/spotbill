@@ -1,0 +1,395 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ *
+ * DESIGN TOKENS
+ * Every colour on this site comes from this block. Nothing outside it.
+ * ------------------------------------------------------------------ */
+@theme {
+  --color-sb-blue: #0b63f6; /* primary — logo blue, CTAs, active states  */
+  --color-sb-blue-bright: #3b8cff; /* hover, gradient top, glow          */
+  --color-sb-blue-deep: #0a44b8; /* small text on blue (AA), gradient end */
+  --color-sb-navy: #0a1739; /* the logo's dark half — dark sections      */
+  --color-sb-ink: #05091a; /* deepest surface, footer                    */
+  --color-sb-cloud: #f2f6fd; /* light section background                 */
+  --color-sb-paper: #fffdf7; /* thermal-receipt cream — receipts ONLY    */
+  --color-sb-line: #dde5f5; /* hairlines on light                       */
+  --color-sb-line-dark: #1b2c57; /* hairlines on dark                    */
+  --color-sb-mint: #17b26a; /* "Paid" / success ticks only              */
+  --color-sb-amber: #f59e0b; /* low-stock + offline warnings only        */
+
+  --font-display: var(--font-archivo), 'Archivo', system-ui, sans-serif;
+  --font-sans: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', ui-monospace, monospace;
+
+  --ease-house: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --sb-gradient: linear-gradient(180deg, #3b8cff 0%, #0b63f6 55%, #0a44b8 100%);
+  --sb-nav-h: 88px;
+  color-scheme: light;
+}
+
+/* ------------------------------------------------------------------ *
+ * BASE
+ * ------------------------------------------------------------------ */
+* {
+  border-color: var(--color-sb-line);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* Lenis owns scrolling; native smooth would fight it */
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-sb-navy);
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv05' 1, 'ss03' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Lenis keeps the real scrollbar; only disable native smoothing. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--color-sb-blue);
+  color: #fff;
+}
+
+/* Accessibility floor: a visible focus ring on everything interactive. */
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-sb-blue-bright);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------------ *
+ * TYPE SCALE
+ * ------------------------------------------------------------------ */
+@layer components {
+  .t-h1 {
+    font-family: var(--font-display);
+    /* Deviates from the brief's 8vw/6.5rem: at that size "Simple Business."
+       wraps inside a two-column hero and the three-line structure — which is
+       the whole idea — collapses. This keeps the impact and the structure. */
+    font-size: clamp(2.4rem, 5vw, 4.6rem);
+    line-height: 0.94;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .t-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.75rem);
+    line-height: 0.98;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+  }
+
+  .t-h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  .t-body {
+    font-size: clamp(1rem, 1.1vw, 1.125rem);
+    line-height: 1.6;
+  }
+
+  .t-mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .t-mono-sm {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The forward lean of the logo, applied to a wrapper — never to the text
+     node itself, so the glyphs stay hinted and the LCP paint stays cheap. */
+  .t-lean {
+    display: inline-block;
+    transform: skewX(-6deg);
+    transform-origin: 0% 100%;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * SHARED PIECES
+ * ------------------------------------------------------------------ */
+.sb-shell {
+  width: 100%;
+  max-width: 84rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.sb-gradient {
+  background-image: var(--sb-gradient);
+}
+
+/* Reveal primitive.
+   The hidden state and the transition live here rather than in JavaScript,
+   so revealing an element costs one class toggle and no per-frame work.
+   `--reveal-delay` carries the stagger. Reduced motion is handled by the
+   media query at the foot of this file; no-JS by the <noscript> block in
+   app/layout.tsx. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s var(--ease-house),
+    transform 0.8s var(--ease-house);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform, opacity;
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* Variants for the few places a plain rise up is not the right entrance. */
+[data-reveal='fade'] {
+  transform: none;
+}
+[data-reveal='left'] {
+  transform: translateX(-24px);
+}
+[data-reveal='scale'] {
+  transform: scale(0.82);
+  transition-duration: 0.7s;
+}
+
+.sb-mask {
+  overflow: hidden;
+  display: block;
+}
+
+/* Receipt paper: cream with a 3% SVG noise tooth. */
+.sb-paper {
+  background-color: var(--color-sb-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* Torn bottom edge of a thermal receipt. */
+.sb-torn {
+  --tooth: 9px;
+  -webkit-mask-image:
+    linear-gradient(#000 0 0),
+    conic-gradient(
+      from -45deg at bottom var(--tooth) left 50%,
+      #0000 90deg,
+      #000 0
+    );
+  mask-image:
+    linear-gradient(#000 0 0),
+    conic-gradient(
+      from -45deg at bottom var(--tooth) left 50%,
+      #0000 90deg,
+      #000 0
+    );
+  -webkit-mask-size:
+    100% calc(100% - var(--tooth)),
+    calc(var(--tooth) * 2) 100%;
+  mask-size:
+    100% calc(100% - var(--tooth)),
+    calc(var(--tooth) * 2) 100%;
+  -webkit-mask-position: top;
+  mask-position: top;
+  -webkit-mask-repeat: no-repeat, repeat-x;
+  mask-repeat: no-repeat, repeat-x;
+}
+
+/* Setup connector: drawSVG without the Club plugin. `pathLength="1"`
+   normalises the path so one dash covers it whatever the viewBox. */
+.sb-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.4s var(--ease-house);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.sb-draw.is-in {
+  stroke-dashoffset: 0;
+}
+
+/* The blue ring that expands out of each setup numeral, once. */
+@keyframes sb-ring {
+  from {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+.sb-ring {
+  opacity: 0;
+}
+.sb-ring.is-in {
+  animation: sb-ring 1.1s var(--ease-house) forwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+/* Hairline module divider with the receipt-rule blue tick. */
+.sb-rule {
+  position: relative;
+  height: 1px;
+  background: var(--color-sb-line);
+}
+.sb-rule::before {
+  content: '';
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline-start: 0;
+  width: 6px;
+  height: 3px;
+  background: var(--color-sb-blue);
+}
+.sb-rule[data-dark] {
+  background: var(--color-sb-line-dark);
+}
+
+/* Soft inner blue glow used only on hover, only on dark cards. */
+.sb-card-dark {
+  transition:
+    border-color 0.35s var(--ease-house),
+    box-shadow 0.35s var(--ease-house),
+    transform 0.35s var(--ease-house);
+}
+.sb-card-dark:hover {
+  border-color: color-mix(in srgb, var(--color-sb-blue) 55%, transparent);
+  box-shadow: inset 0 0 40px -12px color-mix(in srgb, var(--color-sb-blue-bright) 60%, transparent);
+}
+
+/* Magnetic primary button: a blue glow that expands from the pointer. */
+.sb-btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-house);
+  background: radial-gradient(
+    120px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.32),
+    transparent 65%
+  );
+  pointer-events: none;
+}
+.sb-btn-glow:hover::after {
+  opacity: 1;
+}
+
+/* iOS Safari: 100vh includes the URL bar. Use the dynamic unit where the
+   browser supports it and fall back to the old behaviour where it does not. */
+.sb-vh {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Hide scrollbars on the horizontal module rails without losing scroll. */
+.sb-no-bar {
+  scrollbar-width: none;
+}
+.sb-no-bar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ *
+ * PRELOADER — first-load-only branded splash. See components/layout/
+ * Preloader.tsx for the show/hide script. Reduced-motion is handled by the
+ * global override below, which collapses these animations to one frame.
+ * ------------------------------------------------------------------ */
+#sb-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: linear-gradient(180deg, #05091a 0%, #0a1739 100%);
+  transition:
+    opacity 0.5s var(--ease-house),
+    visibility 0.5s var(--ease-house);
+}
+#sb-preloader.sb-hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.sb-preloader-mark {
+  width: 52px;
+  height: 52px;
+  animation: sb-preloader-pulse 1.4s ease-in-out infinite;
+}
+.sb-preloader-ring {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 2.5px solid var(--color-sb-line-dark);
+  border-top-color: var(--color-sb-blue-bright);
+  animation: sb-preloader-spin 0.8s linear infinite;
+}
+@keyframes sb-preloader-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(0.94);
+  }
+}
+@keyframes sb-preloader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * REDUCED MOTION — the non-negotiable floor.
+ * Everything lands in its final state; nothing loops.
+ * ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

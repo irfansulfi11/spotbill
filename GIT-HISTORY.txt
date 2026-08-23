@@ -1,0 +1,32 @@
+Full commit history (the push to GitHub was blocked — see below)
+================================================================
+
+Pushing to github.com/irfansulfi11/spotbill was refused with HTTP 403 on both
+git-receive-pack and the REST contents API: this session's GitHub authorization
+has READ access to the repo but not WRITE. Nothing about the code caused it.
+
+To fix the access, then push yourself:
+  - Reconnect GitHub under claude.ai Settings -> Connectors, granting write
+    access to this repository, or
+  - If the repo belongs to an organization, an owner grants repository access
+    at https://claude.ai/admin-settings/claude-tag
+
+The commits are preserved in the bundle in this folder. To restore them:
+
+  git clone spotbill-git-history.bundle spotbill-web
+  cd spotbill-web
+  git remote set-url origin https://github.com/irfansulfi11/spotbill
+  git push -u origin claude/spotbill-marketing-site-nod8un
+
+The branch is claude/spotbill-marketing-site-nod8un.
+
+Commits in the bundle:
+690bc4b chore: scaffold spotbill site with design tokens and content layer
+3b36b99 feat: nav, footer and ui primitives
+ee9de44 feat: react-built spotbill phone screens and receipt
+6981b79 feat: hero with load sequence and velocity marquee
+8b0eee5 feat: feature bento and pinned module sequence
+5912d78 feat: remaining sections with scroll interactions
+8e7ed43 feat: seo, structured data and pwa assets
+d992880 chore: accessibility, performance and qa pass
+098d1a1 perf: drop ScrollTrigger and confine the rupee glyph to the mono face

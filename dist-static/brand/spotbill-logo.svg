@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 240" width="880" height="240" role="img" aria-label="SpotBill — Smart Billing. Instant Growth.">
+  <g transform="translate(8 -8)"><defs><mask id="gap-lc" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256">
+    <rect width="256" height="256" fill="#fff"/>
+    <path d="M176 26 L112 136 L142 136 L120 240 L188 120 L152 120 Z" fill="none" stroke="#000" stroke-width="9" stroke-linejoin="round"/>
+    <g fill="#000"><rect x="193" y="36" width="34" height="7" rx="3.5"/><rect x="193" y="52" width="34" height="7" rx="3.5"/><rect x="193" y="68" width="23" height="7" rx="3.5"/></g>
+  </mask></defs>
+  <g mask="url(#gap-lc)">
+    <g fill="#0B63F6"><rect x="14" y="164" width="86" height="15" rx="7.5"/><rect x="28" y="192" width="72" height="15" rx="7.5"/><rect x="48" y="220" width="52" height="15" rx="7.5"/></g>
+    <path d="M184 14 h42 a10 10 0 0 1 10 10 v82 l-8.7 -8.5 -8.7 8.5 -8.7 -8.5 -8.7 8.5 -8.7 -8.5 -8.5 8.5 z" fill="#0A1739"/>
+    <path d="M164 54 C164 34 138 24 112 28 C82 33 66 57 82 75 C94 89 122 92 144 100 C166 108 172 126 156 136 C140 146 108 146 94 132" fill="none" stroke="#0B63F6" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M138 122 L138 224 L172 224 C206 224 224 200 224 173 C224 146 206 122 172 122 L138 122" fill="none" stroke="#0A1739" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <path d="M176 26 L112 136 L142 136 L120 240 L188 120 L152 120 Z" fill="#0B63F6"/></g>
+  <g font-family="Archivo, 'Archivo', 'Arial Black', system-ui, sans-serif" font-weight="800">
+    <text x="292" y="140" font-size="104" letter-spacing="-2" fill="#0A1739">SPOT<tspan fill="#0B63F6">BILL</tspan></text>
+  </g>
+  <g>
+    <rect x="292" y="175" width="26" height="4" rx="2" fill="#0B63F6"/>
+    <text x="332" y="182" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="24" letter-spacing="1.6" fill="#5B6B8C">SMART BILLING. INSTANT GROWTH.</text>
+  </g>
+</svg>
