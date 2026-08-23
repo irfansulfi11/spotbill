@@ -1,4 +1,3 @@
-import MobileRedirect from '@/components/layout/MobileRedirect';
 import Nav from '@/components/layout/Nav';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
@@ -18,7 +17,6 @@ import { homeSchema, jsonLd } from '@/lib/seo';
 export default function Home() {
   return (
     <>
-      <MobileRedirect />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd(homeSchema()) }}
