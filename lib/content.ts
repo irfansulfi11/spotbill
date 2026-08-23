@@ -524,6 +524,40 @@ export const screens = {
 
   billing: {
     title: 'New Bill',
+
+    /* Screen chrome, in the order the app draws it. */
+    modeLabel: 'Retail',
+    kotLabel: 'KOT',
+    clearLabel: 'Clear',
+    searchPlaceholder: 'Search All',
+    quickSaleLabel: 'Quick Sale',
+    billLabel: 'Bill',
+    unitLabel: 'unit',
+
+    /* The rows sitting at the top of the cart. The cart scrolls, so the
+       three rows here deliberately do not add up to `cartTotal` — that is
+       the running bill for the whole cart, exactly as the app shows it. */
+    cart: [
+      { name: 'Corndog', qty: 1, rate: 76 },
+      { name: 'Tea', qty: 1, rate: 12 },
+      { name: 'Salad', qty: 2, rate: 10 },
+    ],
+    cartTotal: 3708,
+
+    /* The tile grid. `art` selects the tile illustration in ScreenBilling. */
+    catalogue: [
+      { name: 'Sausage', price: 90, art: 'sausage' },
+      { name: 'Pepsi', price: 55, art: 'pepsi' },
+      { name: 'Tea', price: 12, art: 'tea' },
+      { name: 'Corndog', price: 75, art: 'corndog' },
+      { name: 'Salad', price: 10, art: 'salad' },
+      { name: 'Burrito', price: 50, art: 'burrito' },
+      { name: 'Croissant', price: 175, art: 'croissant' },
+      { name: 'Yogurt', price: 299, art: 'yogurt' },
+      { name: 'Coffee', price: 20, art: 'coffee' },
+    ],
+
+    /* Line items for the printed receipt — components/phone/Receipt.tsx. */
     items: [
       { name: 'Croissant', qty: 1, rate: 175 },
       { name: 'Corndog', qty: 1, rate: 76 },

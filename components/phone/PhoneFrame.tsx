@@ -16,6 +16,15 @@ import { cn } from '@/lib/utils';
  */
 const BASE_W = 258;
 const RATIO = 19.2 / 9;
+const STATUS_H = 34;
+
+/**
+ * The layout box a screen is handed, in design pixels. Screens drawn at real
+ * device dimensions (ScreenBilling) scale themselves against these rather
+ * than hard-coding a second copy of the frame's geometry.
+ */
+export const SCREEN_W = BASE_W;
+export const SCREEN_H = BASE_W * RATIO - STATUS_H;
 
 export default function PhoneFrame({
   children,
@@ -113,8 +122,8 @@ export default function PhoneFrame({
             </div>
 
             <div
-              className="absolute inset-x-0 bottom-0 top-[34px] flex flex-col"
-              style={{ height: BASE_W * RATIO - 34 }}
+              className="absolute inset-x-0 bottom-0 flex flex-col"
+              style={{ top: STATUS_H, height: SCREEN_H }}
             >
               {children}
             </div>

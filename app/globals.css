@@ -16,6 +16,7 @@
   --color-sb-line-dark: #1b2c57; /* hairlines on dark                    */
   --color-sb-mint: #17b26a; /* "Paid" / success ticks only              */
   --color-sb-amber: #f59e0b; /* low-stock + offline warnings only        */
+  --color-sb-red: #e5342c; /* destructive only — the app's Clear action   */
 
   --font-display: var(--font-archivo), 'Archivo', system-ui, sans-serif;
   --font-sans: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif;
